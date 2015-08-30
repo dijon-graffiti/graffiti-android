@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Primary: Cyan, Accent: Deep Purple -->
+    <color name="graf_primary">#00BCD4</color>
+    <color name="graf_primary_dark">#0097A7</color>
+    <color name="graf_accent">#7C4DFF</color>
+
+</resources>

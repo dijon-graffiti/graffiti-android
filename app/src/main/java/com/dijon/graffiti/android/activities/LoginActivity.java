@@ -27,6 +27,7 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.Scopes;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.plus.Plus;
+import com.google.android.gms.plus.model.people.Person;
 
 import java.io.IOException;
 import java.util.Map;
@@ -129,6 +130,23 @@ public class LoginActivity extends AppCompatActivity implements LoginFragment.On
 
     private User createUserFromAuth(AuthData authData) {
         User user = new User();
+        if (Plus.PeopleApi.getCurrentPerson(mGoogleApiClient) != null) {
+            Person currentPerson = Plus.PeopleApi.getCurrentPerson(mGoogleApiClient);
+            // user.setBirthYear(currentPerson.getBirthday());
+            switch (currentPerson.getGender()) {
+                case 0:
+                    user.setGender("male");
+                    break;
+                case 1:
+                    user.setGender("female");
+                    break;
+                case 2:
+                    user.setGender("other");
+                    break;
+            }
+            String email = Plus.AccountApi.getAccountName(mGoogleApiClient);
+            user.setEmail(email);
+        }
         Map<String, Object> providerData = authData.getProviderData();
         String displayName = (String) providerData.get("displayName");
         user.setFirstName(displayName.split(" ")[0]);

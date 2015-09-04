@@ -7,6 +7,7 @@ package com.dijon.graffiti.network.models;
 public class User {
 
     private int birthYear;
+    private String email;
     private String firstName;
     private String gender;
     private String lastName;
@@ -22,6 +23,14 @@ public class User {
 
     public void setBirthYear(int birthYear) {
         this.birthYear = birthYear;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getFirstName() {

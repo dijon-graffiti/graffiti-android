@@ -1,4 +1,4 @@
-package com.dijon.graffiti;
+package com.dijon.graffiti.android;
 
 import android.app.Application;
 

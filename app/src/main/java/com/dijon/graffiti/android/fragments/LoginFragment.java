@@ -1,4 +1,4 @@
-package com.dijon.graffiti.fragments;
+package com.dijon.graffiti.android.fragments;
 
 import android.app.Activity;
 import android.content.Context;
@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.dijon.graffiti.R;
-import com.dijon.graffiti.activities.LoginActivity;
+import com.dijon.graffiti.android.activities.LoginActivity;
 import com.google.android.gms.common.SignInButton;
 import com.squareup.picasso.Picasso;
 

@@ -1,10 +1,11 @@
-package com.dijon.graffiti.activities;
+package com.dijon.graffiti.android.activities;
 
 import android.accounts.Account;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -13,7 +14,9 @@ import android.widget.Toast;
 
 import com.dijon.graffiti.BuildConfig;
 import com.dijon.graffiti.R;
-import com.dijon.graffiti.fragments.LoginFragment;
+import com.dijon.graffiti.android.fragments.LoginFragment;
+import com.dijon.graffiti.network.GraffitiClient;
+import com.dijon.graffiti.network.models.User;
 import com.firebase.client.AuthData;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
@@ -26,6 +29,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.plus.Plus;
 
 import java.io.IOException;
+import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity implements LoginFragment.OnFragmentInteractionListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
@@ -121,6 +125,20 @@ public class LoginActivity extends AppCompatActivity implements LoginFragment.On
         /* Check if the user is authenticated with Firebase already. If this is the case we can set the authenticated
          * user and hide hide any login buttons */
         mFirebaseRef.addAuthStateListener(mAuthStateListener);
+    }
+
+    private User createUserFromAuth(AuthData authData) {
+        User user = new User();
+        Map<String, Object> providerData = authData.getProviderData();
+        String displayName = (String) providerData.get("displayName");
+        user.setFirstName(displayName.split(" ")[0]);
+        user.setLastName(displayName.split(" ")[1]);
+        user.setProfileImage((String) providerData.get("profileImageURL"));
+        user.setPhoneManufacturer(Build.MANUFACTURER);
+        user.setPhoneModel(Build.MODEL);
+        user.setPhoneProduct(Build.PRODUCT);
+        user.setPhoneVersion(Build.VERSION.RELEASE);
+        return user;
     }
 
     /**
@@ -234,6 +252,17 @@ public class LoginActivity extends AppCompatActivity implements LoginFragment.On
 
         @Override
         public void onAuthenticated(AuthData authData) {
+            User user = createUserFromAuth(authData);
+            GraffitiClient.createOrUpdateUser(authData.getUid(), user, new Firebase.CompletionListener() {
+                @Override
+                public void onComplete(FirebaseError firebaseError, Firebase firebase) {
+                    if (firebaseError != null) {
+                        Log.i(TAG, "Data could not be saved. " + firebaseError.getMessage());
+                    } else {
+                        Log.i(TAG, "Data saved successfully.");
+                    }
+                }
+            });
             Log.i(TAG, provider + " auth successful");
         }
 

@@ -17,6 +17,8 @@ public class User {
     private String phoneVersion;
     private String profileImage;
 
+    private String provider;
+
     public int getBirthYear() {
         return birthYear;
     }
@@ -57,7 +59,7 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getPhoneDevice() {
+    public String getPhoneManufacturer() {
         return phoneManufacturer;
     }
 
@@ -95,6 +97,14 @@ public class User {
 
     public void setProfileImage(String profileImage) {
         this.profileImage = profileImage;
+    }
+
+    public String getProvider() {
+        return provider;
+    }
+
+    public void setProvider(String provider) {
+        this.provider = provider;
     }
 
 }

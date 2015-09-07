@@ -156,6 +156,7 @@ public class LoginActivity extends AppCompatActivity implements LoginFragment.On
         user.setPhoneModel(Build.MODEL);
         user.setPhoneProduct(Build.PRODUCT);
         user.setPhoneVersion(Build.VERSION.RELEASE);
+        user.setProvider(authData.getProvider());
         return user;
     }
 
@@ -190,7 +191,7 @@ public class LoginActivity extends AppCompatActivity implements LoginFragment.On
         if (isSignedIn) {
             // Show signed-in user's name
             String name = Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getDisplayName();
-            Snackbar.make(findViewById(android.R.id.content), "Signed In: " + name, Snackbar.LENGTH_SHORT)
+            Snackbar.make(findViewById(android.R.id.content), "Signed In: " + name, Snackbar.LENGTH_INDEFINITE)
                     .show();
         } else {
             // Show signed-out message

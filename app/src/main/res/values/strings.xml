@@ -5,5 +5,7 @@
 
     <!-- Errors: -->
     <string name="play_services_error_fmt">Google Play Services Error: %d</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_activity_camera">CameraActivity</string>
 
 </resources>

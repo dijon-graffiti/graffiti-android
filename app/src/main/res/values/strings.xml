@@ -2,4 +2,8 @@
     <string name="app_name">Graffiti</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
+    <!-- Errors: -->
+    <string name="play_services_error_fmt">Google Play Services Error: %d</string>
+
 </resources>

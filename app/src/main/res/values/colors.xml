@@ -6,4 +6,7 @@
     <color name="graf_primary_dark">#0097A7</color>
     <color name="graf_accent">#7C4DFF</color>
 
+    <!-- Camera Colors-->
+    <color name="control_background">#cc00BCD4</color>
+
 </resources>

@@ -2,17 +2,28 @@ package com.dijon.graffiti.android.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.dijon.graffiti.R;
+import com.dijon.graffiti.android.fragments.HomeFragment;
 
 public class HomeActivity extends AppCompatActivity {
+
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.container, HomeFragment.newInstance())
+                    .commit();
+        }
+        init();
     }
 
 
@@ -37,4 +48,19 @@ public class HomeActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    // <editor-fold desc="Helpers">
+    private void init() {
+        setToolbar("Home");
+    }
+
+    private void setToolbar(String title) {
+        if (toolbar != null) {
+            setSupportActionBar(toolbar);
+            if (getSupportActionBar() != null) {
+                getSupportActionBar().setTitle(title);
+            }
+        }
+    }
+    // </editor-fold>
 }

@@ -1,0 +1,53 @@
+<ScrolView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.dijon.graffiti.android.fragments.ProfileFragment">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="64dp"
+            android:background="@color/graf_accent"
+            android:elevation="8dp"
+            android:id="@+id/profile_picture"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="128dp"
+            android:background="@color/graf_primary"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:id="@+id/profile_name"
+                android:gravity="center"
+                android:paddingBottom="16dp"
+                android:paddingTop="80dp"
+                android:text="Star Lord"
+                android:textColor="@color/white"
+                android:textSize="45sp" />
+
+
+        </LinearLayout>
+
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/profile_feed">
+
+        </ListView>
+    </RelativeLayout>
+</ScrolView>

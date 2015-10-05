@@ -1,18 +1,27 @@
 package com.dijon.graffiti.android.activities;
 
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.dijon.graffiti.R;
+import com.dijon.graffiti.android.fragments.HomeFragment;
+import com.dijon.graffiti.android.fragments.ProfileFragment;
 
 public class HomeActivity extends AppCompatActivity {
+
+    private Fragment currentFrag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        changeFragment(HomeFragment.instantiate(this,"home"),"home");
     }
 
 
@@ -37,4 +46,25 @@ public class HomeActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void showProfile(View view) {
+        //TODO: "profile" will be changed to the users name
+        changeFragment(ProfileFragment.newInstance(),"profile");
+    }
+
+    public void changeFragment(Fragment fragment, String fragmentName) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        getSupportActionBar().setTitle(fragmentName);
+        currentFrag = fragment;
+        fragmentManager.executePendingTransactions();
+        invalidateOptionsMenu();
+
+        fragmentManager.beginTransaction()
+                .replace(R.id.main_content, fragment)
+                .commitAllowingStateLoss();
+
+
+    }
+
+
 }

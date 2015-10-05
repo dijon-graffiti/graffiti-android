@@ -11,7 +11,7 @@ import com.dijon.graffiti.R;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements View.OnClickListener {
 
     public HomeFragment() {
     }
@@ -19,6 +19,16 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        return view;
     }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+
+        }
+    }
+
+
 }

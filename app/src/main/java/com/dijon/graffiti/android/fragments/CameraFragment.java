@@ -34,7 +34,6 @@ import android.os.HandlerThread;
 import android.support.annotation.NonNull;
 import android.support.v13.app.FragmentCompat;
 import android.support.v4.content.ContextCompat;
-import android.util.Base64;
 import android.util.Log;
 import android.util.Size;
 import android.util.SparseIntArray;
@@ -47,7 +46,6 @@ import android.widget.Toast;
 
 import com.dijon.graffiti.R;
 import com.dijon.graffiti.android.views.AutoFitTextureView;
-import com.dijon.graffiti.network.models.Post;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -221,11 +219,14 @@ public class CameraFragment extends Fragment implements View.OnClickListener, Fr
      * This a callback object for the {@link ImageReader}. "onImageAvailable" will be called when a
      * still image is ready to be saved.
      */
-    private final ImageReader.OnImageAvailableListener mOnImageAvailableListener = new ImageReader.OnImageAvailableListener() {
+    private final ImageReader.OnImageAvailableListener mOnImageAvailableListener
+            = new ImageReader.OnImageAvailableListener() {
+
         @Override
         public void onImageAvailable(ImageReader reader) {
             mBackgroundHandler.post(new ImageSaver(reader.acquireNextImage(), mFile));
         }
+
     };
 
     /**
@@ -253,7 +254,8 @@ public class CameraFragment extends Fragment implements View.OnClickListener, Fr
     /**
      * A {@link CameraCaptureSession.CaptureCallback} that handles events related to JPEG capture.
      */
-    private CameraCaptureSession.CaptureCallback mCaptureCallback = new CameraCaptureSession.CaptureCallback() {
+    private CameraCaptureSession.CaptureCallback mCaptureCallback
+            = new CameraCaptureSession.CaptureCallback() {
 
         private void process(CaptureResult result) {
             switch (mState) {
@@ -302,12 +304,16 @@ public class CameraFragment extends Fragment implements View.OnClickListener, Fr
         }
 
         @Override
-        public void onCaptureProgressed(@NonNull CameraCaptureSession session, @NonNull CaptureRequest request, @NonNull CaptureResult partialResult) {
+        public void onCaptureProgressed(@NonNull CameraCaptureSession session,
+                                        @NonNull CaptureRequest request,
+                                        @NonNull CaptureResult partialResult) {
             process(partialResult);
         }
 
         @Override
-        public void onCaptureCompleted(@NonNull CameraCaptureSession session, @NonNull CaptureRequest request, @NonNull TotalCaptureResult result) {
+        public void onCaptureCompleted(@NonNull CameraCaptureSession session,
+                                       @NonNull CaptureRequest request,
+                                       @NonNull TotalCaptureResult result) {
             process(result);
         }
 
@@ -818,9 +824,6 @@ public class CameraFragment extends Fragment implements View.OnClickListener, Fr
                     }
                 }
             }
-            // TODO: Upload file too:
-            Post post = new Post();
-            post.setImage(Base64.encodeToString(bytes, Base64.DEFAULT));
         }
 
     }

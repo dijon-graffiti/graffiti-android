@@ -7,4 +7,6 @@ public class GraffitiService {
 
     public final static String USERS = "users";
 
+    public final static String POSTS = "posts";
+
 }

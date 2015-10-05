@@ -1,6 +1,7 @@
 package com.dijon.graffiti.network;
 
 import com.dijon.graffiti.BuildConfig;
+import com.dijon.graffiti.network.models.Post;
 import com.dijon.graffiti.network.models.User;
 import com.firebase.client.Firebase;
 
@@ -20,6 +21,17 @@ public class GraffitiClient {
      */
     public static void createOrUpdateUser(String uid, User user, Firebase.CompletionListener listener) {
         mFirebaseRef.child(GraffitiService.USERS).child(uid).setValue(user, listener);
+    }
+
+    /**
+     * Uploads an Post to the backend.
+     * TODO: Consider DB structure
+     *
+     * @param post post to upload
+     * @param listener completion listener
+     */
+    public static void postImage(Post post, Firebase.CompletionListener listener) {
+        mFirebaseRef.child(GraffitiService.POSTS).push().setValue(post, listener);
     }
 
 }

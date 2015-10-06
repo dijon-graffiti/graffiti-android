@@ -1,5 +1,6 @@
 package com.dijon.graffiti.android.activities;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -21,7 +22,7 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        changeFragment(HomeFragment.instantiate(this,"home"),"home");
+        changeFragmentMain(Fragment.instantiate(this, HomeFragment.class.getName()), "home",R.anim.no_animation,R.anim.no_animation);
     }
 
 
@@ -49,22 +50,37 @@ public class HomeActivity extends AppCompatActivity {
 
     public void showProfile(View view) {
         //TODO: "profile" will be changed to the users name
-        changeFragment(ProfileFragment.newInstance(),"profile");
+//        changeFragmentMain(ProfileFragment.newInstance(), "profile",
+//                R.anim.slide_in_up,
+//                R.anim.no_animation);
+        startActivity(new Intent(this, ProfileActivity.class));
+    }
+    public void hideProfile(View view) {
+//        changeFragmentMain(Fragment.instantiate(this, HomeFragment.class.getName()),
+//                "home", R.anim.no_animation, R.anim.slide_out_down);
     }
 
-    public void changeFragment(Fragment fragment, String fragmentName) {
+    public void changeFragmentMain(Fragment fragment, String fragmentName , int enter, int exit) {
         FragmentManager fragmentManager = getSupportFragmentManager();
-        getSupportActionBar().setTitle(fragmentName);
         currentFrag = fragment;
         fragmentManager.executePendingTransactions();
         invalidateOptionsMenu();
 
         fragmentManager.beginTransaction()
+                .setCustomAnimations(enter, exit)
                 .replace(R.id.main_content, fragment)
                 .commitAllowingStateLoss();
 
-
     }
 
+    @Override
+    public void onBackPressed(){
+        if(currentFrag.getClass().equals(ProfileFragment.class)){
+            hideProfile(new View(this));
+        }
+        else{
+            super.onBackPressed();
+        }
+    }
 
 }

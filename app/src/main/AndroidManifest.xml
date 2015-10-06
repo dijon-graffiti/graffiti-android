@@ -34,6 +34,11 @@
             android:name=".android.activities.CameraActivity"
             android:label="@string/title_activity_camera" >
         </activity>
+        <activity
+            android:name=".android.activities.ProfileActivity"
+            android:label="@string/title_activity_profile"
+            android:theme="@style/AppTheme" >
+        </activity>
     </application>
 
 </manifest>

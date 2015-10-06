@@ -1,9 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- Material Design Standards -->
     <!-- Primary: Cyan, Accent: Deep Purple -->
     <color name="graf_primary">#00BCD4</color>
     <color name="graf_primary_dark">#0097A7</color>
     <color name="graf_accent">#7C4DFF</color>
+    <!-- Text Colors -->
+    <color name="text_black_87">#DE000000</color>
+    <color name="text_black_75">#BF000000</color>
+    <color name="text_black_54">#8A000000</color>
+    <color name="text_black_35">#59000000</color>
+    <color name="text_black_25">#40000000</color>
+    <color name="text_black_05">#0A000000</color>
+    <color name="text_gray_87">#DE696969</color>
+    <color name="text_white_87">#DEFFFFFF</color>
+    <color name="text_white_75">#BFFFFFFF</color>
+    <color name="text_white_54">#8AFFFFFF</color>
+    <color name="text_link_87">#DE03a9f4</color>
+    <color name="text_link_54">#8A03a9f4</color>
+    <color name="text_warning_87">#DEF44336</color>
+    <color name="text_warning_54">#8AF44336</color>
+
+    <!-- Camera Colors-->
+    <color name="control_background">#CC00BCD4</color>
 
 </resources>

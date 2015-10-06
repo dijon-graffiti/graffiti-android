@@ -279,6 +279,7 @@ public class LoginActivity extends AppCompatActivity implements LoginFragment.On
                         Log.i(TAG, "Data could not be saved. " + firebaseError.getMessage());
                     } else {
                         Log.i(TAG, "Data saved successfully.");
+                        startActivity(new Intent(getBaseContext(), HomeActivity.class));
                     }
                 }
             });

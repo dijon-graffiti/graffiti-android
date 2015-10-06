@@ -1,28 +1,29 @@
 package com.dijon.graffiti.android.activities;
 
-import android.content.Intent;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.dijon.graffiti.R;
 import com.dijon.graffiti.android.fragments.HomeFragment;
-import com.dijon.graffiti.android.fragments.ProfileFragment;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private Fragment currentFrag;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        changeFragmentMain(Fragment.instantiate(this, HomeFragment.class.getName()), "home",R.anim.no_animation,R.anim.no_animation);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.container, HomeFragment.newInstance())
+                    .commit();
+        }
+        init();
     }
 
 
@@ -48,39 +49,18 @@ public class HomeActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void showProfile(View view) {
-        //TODO: "profile" will be changed to the users name
-//        changeFragmentMain(ProfileFragment.newInstance(), "profile",
-//                R.anim.slide_in_up,
-//                R.anim.no_animation);
-        startActivity(new Intent(this, ProfileActivity.class));
-    }
-    public void hideProfile(View view) {
-//        changeFragmentMain(Fragment.instantiate(this, HomeFragment.class.getName()),
-//                "home", R.anim.no_animation, R.anim.slide_out_down);
+    // <editor-fold desc="Helpers">
+    private void init() {
+        setToolbar("Home");
     }
 
-    public void changeFragmentMain(Fragment fragment, String fragmentName , int enter, int exit) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        currentFrag = fragment;
-        fragmentManager.executePendingTransactions();
-        invalidateOptionsMenu();
-
-        fragmentManager.beginTransaction()
-                .setCustomAnimations(enter, exit)
-                .replace(R.id.main_content, fragment)
-                .commitAllowingStateLoss();
-
-    }
-
-    @Override
-    public void onBackPressed(){
-        if(currentFrag.getClass().equals(ProfileFragment.class)){
-            hideProfile(new View(this));
-        }
-        else{
-            super.onBackPressed();
+    private void setToolbar(String title) {
+        if (toolbar != null) {
+            setSupportActionBar(toolbar);
+            if (getSupportActionBar() != null) {
+                getSupportActionBar().setTitle(title);
+            }
         }
     }
-
+    // </editor-fold>
 }

@@ -24,9 +24,24 @@
 
     <include layout="@layout/content_profile" />
 
-    <android.support.design.widget.FloatingActionButton android:id="@+id/fab"
-        android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:layout_margin="@dimen/fab_margin" app:layout_anchor="@id/app_bar"
-        app:layout_anchorGravity="bottom|end" android:src="@android:drawable/ic_dialog_email" />
+    <LinearLayout  android:id="@+id/fab_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="@dimen/fab_margin"
+        app:layout_anchor="@id/app_bar"
+        app:layout_anchorGravity="bottom|end">
+        <ImageView
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:layout_margin="@dimen/fab_margin"
+            android:background="@color/graf_accent"
+            android:id="@+id/profile_picture"/>
+        <android.support.design.widget.FloatingActionButton android:id="@+id/fab"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_margin="@dimen/fab_margin"
+             android:src="@android:drawable/ic_menu_camera" />
+
+    </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>

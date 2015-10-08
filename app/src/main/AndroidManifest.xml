@@ -45,6 +45,11 @@
             android:label="@string/title_activity_profile"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
+        <activity
+            android:name=".android.activities.ProfileNewActivity"
+            android:label="@string/title_activity_profile_new"
+            android:theme="@style/AppTheme" >
+        </activity>
     </application>
 
 </manifest>

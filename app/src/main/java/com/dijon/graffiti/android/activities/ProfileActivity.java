@@ -15,8 +15,10 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.dijon.graffiti.R;
+import com.squareup.picasso.Picasso;
 
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
+    ImageView mProfielPic;
     FloatingActionButton fab;
     RecyclerView mRecyclerView;
     ImageView mProfilePicture;
@@ -29,6 +31,9 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         setTitle("First Name");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mProfielPic = (ImageView) findViewById(R.id.profile_picture);
+        Picasso.with(this).load(R.drawable.background1).into(mProfielPic);
 
         fab = (FloatingActionButton) findViewById(R.id.fab_capture);
         fab.setOnClickListener(this);

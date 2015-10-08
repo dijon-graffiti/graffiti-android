@@ -10,10 +10,10 @@
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/app_bar_height"
+        android:layout_height="250dp"
         android:fitsSystemWindows="true"
-        android:theme="@style/AppTheme.AppBarOverlay">
 
+        android:theme="@style/AppTheme.AppBarOverlay">
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/toolbar_layout"
             android:layout_width="match_parent"
@@ -21,7 +21,14 @@
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
-
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:transitionName="profile_picture"
+                app:layout_collapseMode="parallax"
+                android:scaleType="centerCrop"
+                android:id="@+id/profile_picture"
+                android:src="@drawable/background3"/>
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
@@ -30,15 +37,7 @@
                 app:popupTheme="@style/AppTheme.PopupOverlay" >
 
             </android.support.v7.widget.Toolbar>
-            <ImageView
-                android:layout_width="128dp"
-                android:layout_height="128dp"
-                android:layout_margin="16dp"
-                android:background="@color/graf_accent"
-                android:layout_gravity="left|start|bottom"
-                android:transitionName="profile_picture"
-                android:elevation="8dp"
-                android:id="@+id/profile_picture"/>
+
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
@@ -53,5 +52,7 @@
         android:transitionName="fab"
         app:layout_anchor="@id/app_bar"
         app:layout_anchorGravity="bottom|end" />
+
+
 
 </android.support.design.widget.CoordinatorLayout>

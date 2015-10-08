@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import com.dijon.graffiti.R;
 import com.dijon.graffiti.android.activities.CameraActivity;
 import com.dijon.graffiti.android.activities.ProfileActivity;
+import com.dijon.graffiti.android.activities.ProfileNewActivity;
 
 /**
  * A placeholder fragment containing a simple view.

@@ -10,6 +10,15 @@
         android:gravity="center"
         android:orientation="vertical"
         android:visibility="visible">
+        <ImageView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="16dp"
+            android:transitionName="profile_picture"
+            android:background="@color/graf_accent"
+            android:elevation="8dp"
+            android:id="@+id/profile_picture"/>
 
         <TextView
             android:id="@+id/text_home_title_empty"
@@ -60,6 +69,7 @@
             android:layout_margin="16dp"
             android:src="@drawable/ic_photo_camera_white_24dp"
             app:layout_anchor="@id/recycler_view"
+            android:transitionName="fab"
             app:layout_anchorGravity="bottom|right|end"
             app:layout_behavior="com.dijon.graffiti.android.adapters.ScrollAwareFABBehavior" />
 

@@ -6,6 +6,8 @@
     <color name="graf_primary">#00BCD4</color>
     <color name="graf_primary_dark">#0097A7</color>
     <color name="graf_accent">#7C4DFF</color>
+    <color name="graf_trans">#00000000</color>
+    <color name="white">#FFFFFF</color>
     <!-- Text Colors -->
     <color name="text_black_87">#DE000000</color>
     <color name="text_black_75">#BF000000</color>
@@ -24,5 +26,6 @@
 
     <!-- Camera Colors-->
     <color name="control_background">#CC00BCD4</color>
+
 
 </resources>

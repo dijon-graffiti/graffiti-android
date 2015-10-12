@@ -3,6 +3,8 @@ package com.dijon.graffiti.android;
 import android.app.Application;
 
 import com.firebase.client.Firebase;
+import com.crashlytics.android.Crashlytics;
+import io.fabric.sdk.android.Fabric;
 
 /**
  * Application class that helps control singleton application functions.
@@ -16,6 +18,7 @@ public class GraffitiApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        Fabric.with(this, new Crashlytics());
         Firebase.setAndroidContext(this);
         // TODO: setup crash
 //        if (BuildConfig.USE_CRASHLYTICS) {

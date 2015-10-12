@@ -38,18 +38,15 @@
         <activity
             android:name=".android.activities.CameraActivity"
             android:label="@string/title_activity_camera"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".android.activities.ProfileActivity"
             android:label="@string/title_activity_profile"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
-        <activity
-            android:name=".android.activities.ProfileNewActivity"
-            android:label="@string/title_activity_profile_new"
-            android:theme="@style/AppTheme" >
-        </activity>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="8388d11e0b02e4dac591d39695047e0b27d1ab47" />
     </application>
 
 </manifest>

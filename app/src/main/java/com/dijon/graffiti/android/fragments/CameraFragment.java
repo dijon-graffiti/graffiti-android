@@ -226,9 +226,7 @@ public class CameraFragment extends Fragment implements View.OnClickListener, Fr
 
         @Override
         public void onImageAvailable(ImageReader reader) {
-            Image image = reader.acquireNextImage();
-            mListener.onImageCaptured(image);
-            // mBackgroundHandler.post(new ImageSaver(image, mFile));
+            mBackgroundHandler.post(new ImageSaver(reader.acquireNextImage(), mFile, mListener));
         }
 
     };
@@ -259,6 +257,20 @@ public class CameraFragment extends Fragment implements View.OnClickListener, Fr
      * A {@link CameraCaptureSession.CaptureCallback} that handles events related to JPEG capture.
      */
     private CameraCaptureSession.CaptureCallback mCaptureCallback = new CameraCaptureSession.CaptureCallback() {
+        @Override
+        public void onCaptureProgressed(@NonNull CameraCaptureSession session,
+                                        @NonNull CaptureRequest request,
+                                        @NonNull CaptureResult partialResult) {
+            process(partialResult);
+        }
+
+        @Override
+        public void onCaptureCompleted(@NonNull CameraCaptureSession session,
+                                       @NonNull CaptureRequest request,
+                                       @NonNull TotalCaptureResult result) {
+            process(result);
+        }
+
         private void process(CaptureResult result) {
             switch (mState) {
                 case STATE_PREVIEW: {
@@ -304,21 +316,6 @@ public class CameraFragment extends Fragment implements View.OnClickListener, Fr
                 }
             }
         }
-
-        @Override
-        public void onCaptureProgressed(@NonNull CameraCaptureSession session,
-                                        @NonNull CaptureRequest request,
-                                        @NonNull CaptureResult partialResult) {
-            process(partialResult);
-        }
-
-        @Override
-        public void onCaptureCompleted(@NonNull CameraCaptureSession session,
-                                       @NonNull CaptureRequest request,
-                                       @NonNull TotalCaptureResult result) {
-            process(result);
-        }
-
     };
 
     /**
@@ -390,7 +387,6 @@ public class CameraFragment extends Fragment implements View.OnClickListener, Fr
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mFile = new File(getActivity().getExternalFilesDir(null), "pic.jpg");
     }
 
     @Override
@@ -544,8 +540,7 @@ public class CameraFragment extends Fragment implements View.OnClickListener, Fr
         }
         setUpCameraOutputs(width, height);
         configureTransform(width, height);
-        Activity activity = getActivity();
-        CameraManager manager = (CameraManager) activity.getSystemService(Context.CAMERA_SERVICE);
+        CameraManager manager = (CameraManager) getActivity().getSystemService(Context.CAMERA_SERVICE);
         try {
             if (!mCameraOpenCloseLock.tryAcquire(2500, TimeUnit.MILLISECONDS)) {
                 throw new RuntimeException("Time out waiting to lock camera opening.");
@@ -703,6 +698,7 @@ public class CameraFragment extends Fragment implements View.OnClickListener, Fr
      * Initiate a still image capture.
      */
     private void takePicture() {
+        mFile = new File(getActivity().getExternalFilesDir(null), "pic.jpg");
         lockFocus();
     }
 
@@ -823,15 +819,19 @@ public class CameraFragment extends Fragment implements View.OnClickListener, Fr
          */
         private final File mFile;
 
-        public ImageSaver(Image image, File file) {
+        private final OnFragmentInteractionListener mListener;
+
+        public ImageSaver(Image image, File file, OnFragmentInteractionListener listener) {
             mImage = image;
             mFile = file;
+            mListener = listener;
         }
 
         @Override
         public void run() {
             ByteBuffer buffer = mImage.getPlanes()[0].getBuffer();
             byte[] bytes = new byte[buffer.remaining()];
+            mListener.onImageCaptured(bytes);
             buffer.get(bytes);
             FileOutputStream output = null;
             try {
@@ -931,6 +931,6 @@ public class CameraFragment extends Fragment implements View.OnClickListener, Fr
     }
 
     public interface OnFragmentInteractionListener {
-        void onImageCaptured(Image image);
+        void onImageCaptured(byte[] imageBytes);
     }
 }

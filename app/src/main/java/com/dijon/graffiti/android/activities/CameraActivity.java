@@ -25,8 +25,8 @@ public class CameraActivity extends AppCompatActivity implements CameraFragment.
     }
 
     @Override
-    public void onImageCaptured(Image image) {
-        showFragment(FinalizePostFragment.newInstance(image), false);
+    public void onImageCaptured(byte[] imageBytes) {
+        showFragment(FinalizePostFragment.newInstance(imageBytes), false);
     }
 
     private void showFragment(Fragment newFragment, boolean addToBackStack) {

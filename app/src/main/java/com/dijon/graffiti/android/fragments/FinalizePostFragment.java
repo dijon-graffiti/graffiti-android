@@ -36,14 +36,13 @@ public class FinalizePostFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param image Image to display.
+     * @param imageBytes Image to display.
      * @return A new instance of fragment FinalizePostFragment.
      */
-    public static FinalizePostFragment newInstance(Image image) {
+    public static FinalizePostFragment newInstance(byte[] imageBytes) {
         FinalizePostFragment fragment = new FinalizePostFragment();
         Bundle args = new Bundle();
-        ByteBuffer buffer = image.getPlanes()[0].getBuffer();
-        args.putByteArray(ARG_IMAGE, new byte[buffer.remaining()]);
+        args.putByteArray(ARG_IMAGE, imageBytes);
         fragment.setArguments(args);
         return fragment;
     }

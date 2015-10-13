@@ -2,6 +2,7 @@ package com.dijon.graffiti.android.fragments;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.dijon.graffiti.R;
+import com.dijon.graffiti.android.activities.HomeActivity;
 import com.dijon.graffiti.android.activities.LoginActivity;
 import com.google.android.gms.common.SignInButton;
 import com.squareup.picasso.Picasso;
@@ -85,7 +87,8 @@ public class LoginFragment extends Fragment {
         mGoogleLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListener.onGoogleButtonClicked();
+//                mListener.onGoogleButtonClicked();
+                startActivity(new Intent(getActivity(), HomeActivity.class));
             }
         });
     }

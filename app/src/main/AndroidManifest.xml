@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.dijon.graffiti" >
+    package="com.dijon.graffiti">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
@@ -15,11 +15,11 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".android.activities.LoginActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -38,12 +38,14 @@
         <activity
             android:name=".android.activities.CameraActivity"
             android:label="@string/title_activity_camera"
+            android:parentActivityName=".android.activities.HomeActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".android.activities.ProfileActivity"
             android:label="@string/title_activity_profile"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
+
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="8388d11e0b02e4dac591d39695047e0b27d1ab47" />

@@ -8,6 +8,20 @@
     <color name="graf_accent">#7C4DFF</color>
     <color name="graf_trans">#00000000</color>
     <color name="white">#FFFFFF</color>
+
+
+    <color name="deep_purple_900">#311B92</color>
+    <color name="cyan_900">#006064</color>
+
+
+    <color name="grey_100">#F5F5F5</color>
+    <color name="grey_200">#EEEEEE</color>
+    <color name="grey_300">#E0E0E0</color>
+    <color name="grey_700">#616161</color>
+    <color name="grey_800">#424242</color>
+    <color name="grey_900">#212121</color>
+
+
     <!-- Text Colors -->
     <color name="text_black_87">#DE000000</color>
     <color name="text_black_75">#BF000000</color>

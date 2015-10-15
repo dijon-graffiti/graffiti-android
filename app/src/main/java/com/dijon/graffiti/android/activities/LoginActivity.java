@@ -1,6 +1,7 @@
 package com.dijon.graffiti.android.activities;
 
 import android.accounts.Account;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 import com.dijon.graffiti.BuildConfig;
 import com.dijon.graffiti.R;
 import com.dijon.graffiti.android.fragments.LoginFragment;
+import com.dijon.graffiti.android.util.SharedPreferenceHelper;
 import com.dijon.graffiti.network.GraffitiClient;
 import com.dijon.graffiti.network.models.User;
 import com.firebase.client.AuthData;
@@ -270,7 +272,7 @@ public class LoginActivity extends AppCompatActivity implements LoginFragment.On
         }
 
         @Override
-        public void onAuthenticated(AuthData authData) {
+        public void onAuthenticated(final AuthData authData) {
             User user = createUserFromAuth(authData);
             GraffitiClient.createOrUpdateUser(authData.getUid(), user, new Firebase.CompletionListener() {
                 @Override
@@ -279,6 +281,7 @@ public class LoginActivity extends AppCompatActivity implements LoginFragment.On
                         Log.i(TAG, "Data could not be saved. " + firebaseError.getMessage());
                     } else {
                         Log.i(TAG, "Data saved successfully.");
+                        SharedPreferenceHelper.setUserId(getApplicationContext(), authData.getUid());
                         startActivity(new Intent(getBaseContext(), HomeActivity.class));
                     }
                 }

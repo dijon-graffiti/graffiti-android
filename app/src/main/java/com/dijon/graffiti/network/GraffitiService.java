@@ -6,5 +6,5 @@ package com.dijon.graffiti.network;
 public class GraffitiService {
 
     public final static String USERS = "users";
-
+    public final static String POSTS = "posts";
 }

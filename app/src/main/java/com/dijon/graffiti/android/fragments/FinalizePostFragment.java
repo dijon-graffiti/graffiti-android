@@ -7,11 +7,13 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.dijon.graffiti.R;
@@ -65,6 +67,15 @@ public class FinalizePostFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_finalize_post, container, false);
         ImageView imgPost = (ImageView) view.findViewById(R.id.image_post);
         Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab_finalize);
+        final EditText title = (EditText) view.findViewById(R.id.text_title);
+        final EditText caption = (EditText) view.findViewById(R.id.text_caption);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.onFinalizeButtonClicked(title.getText().toString(), caption.getText().toString());
+            }
+        });
         setupToolbar(toolbar);
         Bitmap bmp = BitmapFactory.decodeByteArray(mImageByteArray, 0, mImageByteArray.length);
         imgPost.setImageBitmap(bmp);
@@ -88,9 +99,6 @@ public class FinalizePostFragment extends Fragment {
         mListener = null;
     }
 
-    public interface OnFragmentInteractionListener {
-    }
-
     private void setupToolbar(Toolbar toolbar) {
         if (toolbar != null) {
             AppCompatActivity activity = ((AppCompatActivity) getActivity());
@@ -100,6 +108,10 @@ public class FinalizePostFragment extends Fragment {
                 activity.getSupportActionBar().setTitle("");
             }
         }
+    }
+
+    public interface OnFragmentInteractionListener {
+        void onFinalizeButtonClicked(String title, String caption);
     }
 
 }
